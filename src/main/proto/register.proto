@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+// same as gradle/maven groupID
+package com.github.jakutenshi;
+
+// java compile parameters
+option java_package = "com.github.jakutenshi.examples.grpc"; // generated java classes package
+option java_multiple_files = true; // split generated classes on multiple files
+
+message User {
+  string lastname = 1;
+  string firstname = 2;
+  string middlename = 3;
+  int32 age = 4;
+  enum Gender {
+    MALE = 0;
+    FEMALE = 1;
+  }
+  Gender gender = 5;
+}
+
+message RegistrationResult {
+  bool succeeded = 1;
+  string error = 2;
+}
+
+service RegistrationService {
+  rpc Register(User) returns (RegistrationResult);
+}
